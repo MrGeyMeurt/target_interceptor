@@ -24,10 +24,10 @@ export const getTarget = (type)=>{
   switch(type){
 
     case TYPE.SPHERE:
-      mesh = new THREE.Mesh(
-        new THREE.SphereGeometry(0.5, 16, 16),
-        colors.blue
-      );
+    mesh = new THREE.Mesh(
+      new THREE.SphereGeometry(0.8, 16, 16),
+      colors.blue
+    );
       mesh.userData ={
         gain: 10,
         speed: 1

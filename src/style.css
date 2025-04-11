@@ -5,13 +5,33 @@
     overflow: hidden;
 }
 
+.custom-cursor {
+    position: fixed;
+    width: 32px;
+    height: 32px;
+    background: white;
+    border-radius: 50%;
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    z-index: 9999;
+    transition: transform 0.1s;
+}
+
+body {
+    cursor: none;
+}
+
+.custom-cursor.active {
+    transform: translate(-50%, -50%) scale(0.8);
+}
+
 .screen {
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     text-align: center;
-    color: rgb(160, 24, 24);
+    color: white;
     display: none;
 }
 
@@ -23,7 +43,12 @@
     padding: 10px 20px;
     font-size: 1.2em;
     margin-top: 20px;
-    cursor: pointer;
+    cursor: none;
+    border: none;
+}
+
+.screen button:hover {
+    background-color: lightgreen;
 }
 
 .score {

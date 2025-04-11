@@ -8,6 +8,7 @@ const gameOverScreen = document.getElementById('gameOverScreen');
 const startButton = document.getElementById('startButton');
 const replayButton = document.getElementById('replayButton');
 const scoreElement = document.getElementById('score');
+const cursor = document.querySelector('.custom-cursor');
 
 startButton.addEventListener('click', startGame);
 replayButton.addEventListener('click', startGame);
@@ -112,13 +113,21 @@ ray.set(rayOrigin, rayDirection);
 
 const pointer = new THREE.Vector2();
 
+document.addEventListener('mousemove', (e) => {
+    cursor.style.left = e.clientX + 'px';
+    cursor.style.top = e.clientY + 'px';
+});
+
 document.addEventListener('click', (event) => {
     if(gameState !== 'playing') return;
 
-    pointer.x = (event.clientX / window.innerWidth) * 2 - 1;
-    pointer.y = -(event.clientY / window.innerHeight) * 2 + 1;
+    const rect = canvas.getBoundingClientRect();
+    const x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
+    const y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
 
-    ray.setFromCamera(pointer, camera);
+    ray.setFromCamera(new THREE.Vector2(x, y), camera);
+    ray.params.Points.threshold = 0.4; // Cursor size
+
     const intersects = ray.intersectObjects(targets);
     
     intersects.forEach(intersect => {
@@ -128,7 +137,13 @@ document.addEventListener('click', (event) => {
     });
 });
 
+document.addEventListener('mousedown', () => {
+    cursor.classList.add('active');
+});
 
+document.addEventListener('mouseup', () => {
+    cursor.classList.remove('active');
+});
 
 
 /**
