@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Three.js starter</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+    <!-- Dans index.html -->
+    <div id="titleScreen" class="screen">
+        <h1>SPACE INTERCEPTOR</h1>
+        <button id="startButton">START</button>
+    </div>
+
+    <div id="gameOverScreen" class="screen">
+        <h2>GAME OVER</h2>
+        <p>Score: <span id="finalScore">0</span></p>
+        <button id="replayButton">REPLAY</button>
+    </div>
+
+    <div id="score" class="score"></div>
+    <canvas class="webgl"></canvas>
+    <script type="module" src="./index.js"></script>
+</body>
+
+</html>
