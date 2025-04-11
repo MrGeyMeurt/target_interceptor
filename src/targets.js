@@ -12,7 +12,7 @@ export const TYPE = {
   BONUS: 3
 };
 
-const SCREEN_LIMIT = {
+export const SCREEN_LIMIT = {
   LEFT: -15,
   RIGHT: 15
 };

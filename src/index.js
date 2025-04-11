@@ -1,8 +1,7 @@
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
-import { TYPE, getTarget, respawn } from './targets';
+import { TYPE, getTarget, respawn, SCREEN_LIMIT } from './targets';
 
-// Variables globales
 let gameState = 'title';
 const titleScreen = document.getElementById('titleScreen');
 const gameOverScreen = document.getElementById('gameOverScreen');
@@ -10,7 +9,6 @@ const startButton = document.getElementById('startButton');
 const replayButton = document.getElementById('replayButton');
 const scoreElement = document.getElementById('score');
 
-// Gestion des clics
 startButton.addEventListener('click', startGame);
 replayButton.addEventListener('click', startGame);
 
@@ -23,7 +21,7 @@ function startGame() {
     playerScore = 0;
     scoreElement.textContent = '0';
     
-    // Réinitialiser les cibles
+    // Target reinitialization
     targets.forEach(target => respawn(target));
 }
 
@@ -78,17 +76,15 @@ const sizes = {
     height: window.innerHeight
 };
 
+// Responsive
 window.addEventListener('resize', () =>
 {
-    // Update sizes
     sizes.width = window.innerWidth;
     sizes.height = window.innerHeight;
 
-    // Update camera
     camera.aspect = sizes.width / sizes.height;
     camera.updateProjectionMatrix();
 
-    // Update renderer
     renderer.setSize(sizes.width, sizes.height);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 })
@@ -154,9 +150,9 @@ const tick = () => {
     const delta = clock.getDelta();
     
     if(gameState === 'playing') {
-        // Mise à jour des positions
+        // Update targets
         targets.forEach(target => {
-            target.position.x += target.userData.speed * delta * 0.5;
+            target.position.x += target.userData.speed * delta * 2;
             
             if(target.position.x > SCREEN_LIMIT.RIGHT) {
                 gameOver();
